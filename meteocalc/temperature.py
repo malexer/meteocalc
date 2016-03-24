@@ -1,11 +1,14 @@
 """Temperature conversion routines."""
 
+from mimicfloat import MimicFloat
+
+
 C = 'c'  # Celcius
 F = 'f'  # Fahrenheit
 K = 'k'  # Kelvin
 
 
-class Temp(object):
+class Temp(metaclass=MimicFloat):
     """Temperature value.
 
     Temp instance can be created in any unit by specifying `units` attribute.

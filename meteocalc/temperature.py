@@ -1,9 +1,8 @@
 """Temperature conversion routines."""
 
-
-C = 'C'  # Celcius
-F = 'F'  # Fahrenheit
-K = 'K'  # Kelvin
+C = 'c'  # Celcius
+F = 'f'  # Fahrenheit
+K = 'k'  # Kelvin
 
 
 class Temp(object):
@@ -19,7 +18,17 @@ class Temp(object):
         K - Kelvin
     """
 
-    def __init__(self, temperature, units='F'):
+    _allowed_units = (C, F, K)
+    _conversions = dict(
+        # Fahrenheit
+        c2f=lambda t: t * 9 / 5. + 32,
+        f2c=lambda t: (t - 32) * 5 / 9.,
+        # Kelvin
+        c2k=lambda t: t + 273.15,
+        k2c=lambda t: t - 273.15,
+    )
+
+    def __init__(self, temperature, units='C'):
         """Create new temperature value.
 
         :param temperature: temperature value in selected units.
@@ -28,47 +37,64 @@ class Temp(object):
         :type units: str
         """
 
-        self.default_units = units
+        self.units = units.lower()
+        self.value = float(temperature)
 
-        if units == C:
-            self._celcius = float(temperature)
-        elif units == F:
-            self._celcius = self.f2c(temperature)
-        elif units == K:
-            self._celcius = self.k2c(temperature)
-        else:
-            allowed_units = ', '.join(map(lambda u: '"%s"' % u, [C, F, K]))
+        if self.units not in self._allowed_units:
+            allowed_units = ', '.join(
+                map(lambda u: '"%s"' % u.upper(), self._allowed_units)
+            )
             msg = 'Unsupported units "{}". Currently supported are: {}.'
             raise ValueError(msg.format(units, allowed_units))
 
-    def _f2c(self, f):
-        """Fahrenheit to Celcius."""
+    @classmethod
+    def convert(cls, value, from_units, to_units):
+        """Convert temperature value between any supported units."""
 
-        return (f - 32) * 5 / 9.
+        from_units = from_units.lower()
+        to_units = to_units.lower()
 
-    def _k2c(self, k):
-        """Kelvin to Celcius."""
+        if from_units == to_units:
+            return value
 
-        return k - 273.15
+        if from_units != C:
+            func_name = '{}2{}'.format(from_units, C)
+            f = cls._conversions[func_name]
+            value = f(value)
 
-    def __int__(self):
-        return self.c
+            if to_units == C:
+                return value
+
+        func_name = '{}2{}'.format(C, to_units)
+        f = cls._conversions[func_name]
+        return f(value)
+
+    def _convert_to(self, units):
+        return self.convert(self.value, from_units=self.units, to_units=units)
 
     @property
     def c(self):
         """Temperature in Celcius."""
-        return self._celcius
+        return self._convert_to(C)
 
     @property
     def f(self):
         """Temperature in Fahrenheit."""
-        return self._celcius * 9 / 5. + 32
+        return self._convert_to(F)
 
     @property
     def k(self):
         """Temperature in Kelvin."""
-        return self._celcius + 273.15
+        return self._convert_to(K)
 
     def __float__(self):
-        property_mapping = {C: self.c, F: self.f, K: self.k}
-        return property_mapping[self.default_units]
+        return self.value
+
+    def __int__(self):
+        return int(self.value)
+
+    def __str__(self):
+        return str(float(self))
+
+    def __repr__(self):
+        return 'Temp({}, units="{}")'.format(self.value, self.units.upper())

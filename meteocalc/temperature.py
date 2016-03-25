@@ -95,6 +95,9 @@ class Temp(metaclass=FloatCompatible):
     def __int__(self):
         return int(self.value)
 
+    def __round__(self, n=0):
+        return round(self.value, n)
+
     def __str__(self):
         return str(self.value)
 

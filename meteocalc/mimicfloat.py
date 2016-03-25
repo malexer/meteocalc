@@ -1,10 +1,13 @@
+from functools import wraps
 import operator
 
 
 def math_method(name, right=False):
+    math_func = getattr(operator, name)
+
+    @wraps(math_func)
     def wrapper(self, other):
         value = self.value
-        math_func = getattr(operator, name)
 
         if right:
             value, other = other, value
@@ -17,14 +20,14 @@ def math_method(name, right=False):
 
 class MimicFloat(type):
 
-    overrride_methods = ('__add__', '__sub__', '__mul__', '__truediv__')
-    overrride_rmethods = ('__radd__', '__rsub__', '__rmul__', '__rtruediv__')
+    math_methods = ('__add__', '__sub__', '__mul__', '__truediv__')
+    math_rmethods = ('__radd__', '__rsub__', '__rmul__', '__rtruediv__')
 
     def __new__(cls, name, bases, namespace):
-        for method in cls.overrride_methods:
+        for method in cls.math_methods:
             namespace[method] = math_method(method)
 
-        for rmethod in cls.overrride_rmethods:
+        for rmethod in cls.math_rmethods:
             method = rmethod.replace('__r', '__')
             namespace[rmethod] = math_method(method, right=True)
 

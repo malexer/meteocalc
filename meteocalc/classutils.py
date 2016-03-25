@@ -6,8 +6,7 @@ class FloatCompatible(type):
     """Metaclass to make Temp class compatible with float for basic math.
 
     This will allow to mix Temp class with floats in basic math expressions
-    and return Temp instance in result. Default units will be assumed in this
-    case.
+    and return Temp instance in result of the same units.
     """
 
     math_methods = (

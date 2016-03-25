@@ -10,10 +10,20 @@ Check wikipedia for more info:
 
 import math
 
-from temperature import Temp
+from temperature import Temp, F
 
 
 def heat_index(temperature, humidity):
+    """Calculate Heat Index based on NOAA equation.
+
+    :param temperature: temperature value in Fahrenheit or Temp instance.
+    :type temperature: int, float, Temp
+    :param humidity: relative humidity in % (1-100)
+    :type humidity: int, float
+    :returns: Heat Index value (temperature)
+    :rtype: Temp
+    """
+
     c1 = -42.379
     c2 = 2.04901523
     c3 = 10.14333127
@@ -39,4 +49,4 @@ def heat_index(temperature, humidity):
         c9 * T**2 * R**2,
     ])
 
-    return Temp(HI, units='F')
+    return Temp(HI, units=F)

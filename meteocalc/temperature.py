@@ -12,7 +12,6 @@ class Temp(metaclass=FloatCompatible):
     """Temperature value.
 
     Temp instance can be created in any unit by specifying `units` attribute.
-
     Can be converted to any unit by using properties: .c. .f, .k
 
     Currently supported units:

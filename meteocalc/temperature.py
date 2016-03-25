@@ -1,6 +1,6 @@
 """Temperature conversion routines."""
 
-from mimicfloat import MimicFloat
+from classutils import FloatCompatible
 
 
 C = 'c'  # Celcius
@@ -8,7 +8,7 @@ F = 'f'  # Fahrenheit
 K = 'k'  # Kelvin
 
 
-class Temp(metaclass=MimicFloat):
+class Temp(metaclass=FloatCompatible):
     """Temperature value.
 
     Temp instance can be created in any unit by specifying `units` attribute.
@@ -97,7 +97,7 @@ class Temp(metaclass=MimicFloat):
         return int(self.value)
 
     def __str__(self):
-        return str(float(self))
+        return str(self.value)
 
     def __repr__(self):
         return 'Temp({}, units="{}")'.format(self.value, self.units.upper())

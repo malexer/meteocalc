@@ -1,6 +1,6 @@
 """Temperature conversion routines."""
 
-from classutils import FloatCompatible
+from .classutils import FloatCompatible
 
 
 C = 'c'  # Celcius

@@ -49,20 +49,19 @@ def heat_index(temperature, humidity):
 
     # try simplified formula first (used for HI < 80)
     HI = 0.5 * (T + 61. + (T - 68.) * 1.2 + RH * 0.094)
-    if HI < 80:
-        return Temp(HI, units=F)
 
-    # use Rothfusz regression
-    HI = math.fsum([
-        c1,
-        c2 * T,
-        c3 * RH,
-        c4 * T * RH,
-        c5 * T**2,
-        c6 * RH**2,
-        c7 * T**2 * RH,
-        c8 * T * RH**2,
-        c9 * T**2 * RH**2,
-    ])
+    if HI >= 80:
+        # use Rothfusz regression
+        HI = math.fsum([
+            c1,
+            c2 * T,
+            c3 * RH,
+            c4 * T * RH,
+            c5 * T**2,
+            c6 * RH**2,
+            c7 * T**2 * RH,
+            c8 * T * RH**2,
+            c9 * T**2 * RH**2,
+        ])
 
     return Temp(HI, units=F)

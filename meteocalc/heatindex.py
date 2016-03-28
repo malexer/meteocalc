@@ -10,7 +10,7 @@ Check wikipedia for more info:
 
 import math
 
-from temperature import Temp, F
+from .temperature import Temp, F
 
 
 def heat_index(temperature, humidity):

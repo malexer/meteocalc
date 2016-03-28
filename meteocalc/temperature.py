@@ -51,7 +51,17 @@ class Temp(metaclass=FloatCompatible):
 
     @classmethod
     def convert(cls, value, from_units, to_units):
-        """Convert temperature value between any supported units."""
+        """Convert temperature value between any supported units.
+
+        Conversion is performed using Celcius as a base unit.
+        i.e. Fahrenheit -> Kelvin will be converted in two steps: F -> C -> K
+
+        :param value: temperature value
+        :type value: int, float
+        :param from_units: source units ('C', 'F', 'K')
+        :param to_units: target units ('C', 'F', 'K')
+        :rtype: float
+        """
 
         from_units = from_units.lower()
         to_units = to_units.lower()

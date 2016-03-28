@@ -23,6 +23,14 @@ heat_index_noaa_table = {
     (90, 100): 132,
 }
 
+heat_index_below_80 = {
+    (42, 80): 39.66,
+    (50, 30): 46.11,
+    (50, 90): 48.93,
+    (60, 80): 59.46,
+    (70, 100): 71.4,
+}
+
 
 class HeatIndexTest(unittest.TestCase):
 
@@ -40,6 +48,11 @@ class HeatIndexTest(unittest.TestCase):
         self.assertIsInstance(hi, Temp)
         self.assertEqual(round(hi.c), 35)
         self.assertEqual(round(hi, 1), 95.1)
+
+    def test_heat_index_values_below_80(self):
+        for t_rh, hi in heat_index_below_80.items():
+            t, rh = t_rh
+            self.assertEqual(round(heat_index(t, rh), 2), hi)
 
 
 if __name__ == '__main__':

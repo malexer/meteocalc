@@ -1,6 +1,6 @@
 import unittest
 
-from context import temperature
+from tests.context import temperature
 
 
 temperature_values = (

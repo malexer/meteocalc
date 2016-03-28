@@ -1,6 +1,6 @@
 import unittest
 
-from tests.context import heat_index
+from tests.context import heat_index, Temp
 
 
 heat_index_noaa_table = {
@@ -30,6 +30,17 @@ class HeatIndexTest(unittest.TestCase):
         for t_rh, hi in heat_index_noaa_table.items():
             t, rh = t_rh
             self.assertEqual(round(heat_index(t, rh)), hi)
+
+    def test_return_type(self):
+        self.assertIsInstance(heat_index(80, 40), Temp)
+        self.assertIsInstance(heat_index(52, 56), Temp)
+
+    def test_input_temp_class(self):
+        hi = heat_index(Temp(30, units='c'), 70)
+        self.assertIsInstance(hi, Temp)
+        self.assertEqual(round(hi.c), 35)
+        self.assertEqual(round(hi, 1), 95.1)
+
 
 if __name__ == '__main__':
     unittest.main()

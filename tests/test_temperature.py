@@ -22,51 +22,51 @@ class TempTest(unittest.TestCase):
 
     def test_celcius_to_celcius(self):
         for t in temperature_values:
-            temp = Temp(t['c'], units='C')
+            temp = Temp(t['c'], unit='C')
             self.assertEqual(temp.c, t['c'])
 
     def test_fahrenheit_to_fahrenheit(self):
         for t in temperature_values:
-            temp = Temp(t['f'], units='F')
+            temp = Temp(t['f'], unit='F')
             self.assertEqual(temp.f, t['f'])
 
     def test_kelvin_to_kelvin(self):
         for t in temperature_values:
-            temp = Temp(t['k'], units='K')
+            temp = Temp(t['k'], unit='K')
             self.assertEqual(temp.k, t['k'])
 
     def test_celcius_to_fahrenheit(self):
         for t in temperature_values:
-            temp = Temp(t['c'], units='C')
+            temp = Temp(t['c'], unit='C')
             self.assertEqual(round(temp.f, 2), t['f'])
 
     def test_celcius_to_kelvin(self):
         for t in temperature_values:
-            temp = Temp(t['c'], units='C')
+            temp = Temp(t['c'], unit='C')
             self.assertEqual(round(temp.k, 2), t['k'])
 
     def test_fahrenheit_to_celcius(self):
         for t in temperature_values:
-            temp = Temp(t['f'], units='F')
+            temp = Temp(t['f'], unit='F')
             self.assertEqual(round(temp.c, 2), t['c'])
 
     def test_fahrenheit_to_kelvin(self):
         for t in temperature_values:
-            temp = Temp(t['f'], units='F')
+            temp = Temp(t['f'], unit='F')
             self.assertEqual(round(temp.k, 2), t['k'])
 
     def test_kelvin_to_celcius(self):
         for t in temperature_values:
-            temp = Temp(t['k'], units='K')
+            temp = Temp(t['k'], unit='K')
             self.assertEqual(round(temp.c, 2), t['c'])
 
     def test_kelvin_to_fahrenheit(self):
         for t in temperature_values:
-            temp = Temp(t['k'], units='K')
+            temp = Temp(t['k'], unit='K')
             self.assertEqual(round(temp.f, 2), t['f'])
 
     def test_add_with_float(self):
-        t = Temp(243.15, units='K')
+        t = Temp(243.15, unit='K')
         t2 = 40 + t
         self.assertEqual(float(t2), 283.15)
         self.assertEqual(t2.c, 10)
@@ -75,7 +75,7 @@ class TempTest(unittest.TestCase):
         self.assertIsInstance(t2, Temp)
 
     def test_sub_with_float(self):
-        t = Temp(68, units='F')
+        t = Temp(68, unit='F')
         t2 = t - 36
         self.assertEqual(int(t2), 32)
         self.assertEqual(t2.c, 0)
@@ -84,7 +84,7 @@ class TempTest(unittest.TestCase):
         self.assertIsInstance(t2, Temp)
 
     def test_mul_with_float(self):
-        t = Temp(100, units='C')
+        t = Temp(100, unit='C')
         t2 = t * 2
         self.assertEqual(int(t2), 200)
         self.assertEqual(t2.c, 200)
@@ -93,7 +93,7 @@ class TempTest(unittest.TestCase):
         self.assertIsInstance(t2, Temp)
 
     def test_truediv_with_float(self):
-        t = Temp(573, units='K')
+        t = Temp(573, unit='K')
         t2 = t / 2
         self.assertEqual(t2.k, 286.5)
         self.assertEqual(round(t2.c, 2), 13.35)
@@ -102,7 +102,7 @@ class TempTest(unittest.TestCase):
         self.assertIsInstance(t2, Temp)
 
     def test_neg_with_float(self):
-        t = Temp(-22, units='F')
+        t = Temp(-22, unit='F')
         t2 = -t
         self.assertEqual(int(t2), 22)
         self.assertEqual(round(t2.c, 2), -5.56)

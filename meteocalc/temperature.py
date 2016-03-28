@@ -11,7 +11,7 @@ K = 'k'  # Kelvin
 class Temp(metaclass=FloatCompatible):
     """Temperature value.
 
-    Temp instance can be created in any unit by specifying `units` attribute.
+    Temp instance can be created in any unit by specifying `unit` attribute.
     Can be converted to any unit by using properties: .c. .f, .k
 
     Currently supported units:
@@ -30,24 +30,24 @@ class Temp(metaclass=FloatCompatible):
         k2c=lambda t: t - 273.15,
     )
 
-    def __init__(self, temperature, units='C'):
+    def __init__(self, temperature, unit='C'):
         """Create new temperature value.
 
         :param temperature: temperature value in selected units.
         :type temperature: int, float
-        :param units: temperature units, allowed values: C, F, K.
-        :type units: str
+        :param unit: temperature unit, allowed values: C, F, K.
+        :type unit: str
         """
 
-        self.units = units.lower()
+        self.unit = unit.lower()
         self.value = float(temperature)
 
-        if self.units not in self._allowed_units:
+        if self.unit not in self._allowed_units:
             allowed_units = ', '.join(
                 map(lambda u: '"%s"' % u.upper(), self._allowed_units)
             )
-            msg = 'Unsupported units "{}". Currently supported are: {}.'
-            raise ValueError(msg.format(units, allowed_units))
+            msg = 'Unsupported unit "{}". Currently supported units: {}.'
+            raise ValueError(msg.format(unit, allowed_units))
 
     @classmethod
     def convert(cls, value, from_units, to_units):
@@ -81,8 +81,8 @@ class Temp(metaclass=FloatCompatible):
         f = cls._conversions[func_name]
         return f(value)
 
-    def _convert_to(self, units):
-        return self.convert(self.value, from_units=self.units, to_units=units)
+    def _convert_to(self, unit):
+        return self.convert(self.value, from_units=self.unit, to_units=unit)
 
     @property
     def c(self):
@@ -112,4 +112,4 @@ class Temp(metaclass=FloatCompatible):
         return str(self.value)
 
     def __repr__(self):
-        return 'Temp({}, units="{}")'.format(self.value, self.units.upper())
+        return 'Temp({}, unit="{}")'.format(self.value, self.unit.upper())

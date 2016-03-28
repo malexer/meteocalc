@@ -64,4 +64,4 @@ def heat_index(temperature, humidity):
             c9 * T**2 * RH**2,
         ])
 
-    return Temp(HI, units=F)
+    return Temp(HI, unit=F)

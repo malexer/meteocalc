@@ -44,7 +44,7 @@ class HeatIndexTest(unittest.TestCase):
         self.assertIsInstance(heat_index(52, 56), Temp)
 
     def test_input_temp_class(self):
-        hi = heat_index(Temp(30, units='c'), 70)
+        hi = heat_index(Temp(30, unit='c'), 70)
         self.assertIsInstance(hi, Temp)
         self.assertEqual(round(hi.c), 35)
         self.assertEqual(round(hi, 1), 95.1)

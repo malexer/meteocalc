@@ -6,7 +6,7 @@ class FloatCompatible(type):
     """Metaclass to make Temp class compatible with float for basic math.
 
     This will allow to mix Temp class with floats in basic math expressions
-    and return Temp instance in result of the same units.
+    and return Temp instance in result of the same unit.
     """
 
     math_methods = (
@@ -48,6 +48,6 @@ class FloatCompatible(type):
                 args = args[::-1]  # args: self, other -> other, self
 
             result = math_func(*args)
-            return type(self)(result, units=self.units)
+            return type(self)(result, unit=self.unit)
 
         return wrapper

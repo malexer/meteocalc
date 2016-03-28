@@ -14,13 +14,17 @@ from .temperature import Temp, F
 
 
 def heat_index(temperature, humidity):
-    """Calculate Heat Index based on NOAA equation.
+    """Calculate Heat Index (feels like temperature) based on NOAA equation.
+
+    Default unit for resulting Temp value is Fahrenheit and it will be used
+    in case of casting to int/float. Use Temp properties to convert result to
+    Celcius (Temp.c) or Kelvin (Temp.k).
 
     :param temperature: temperature value in Fahrenheit or Temp instance.
     :type temperature: int, float, Temp
     :param humidity: relative humidity in % (1-100)
     :type humidity: int, float
-    :returns: Heat Index value (temperature)
+    :returns: Heat Index value
     :rtype: Temp
     """
 

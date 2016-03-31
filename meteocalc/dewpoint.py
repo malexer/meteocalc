@@ -10,10 +10,22 @@ Check wikipedia for more info:
 
 import math
 
-from .temperature import Temp, C, F
+from .temperature import Temp, C
 
 
 def dew_point(temperature, humidity):
+    """Calculate Dew Point temperature.
+
+    Two set of constants are used provided by Arden Buck: for positive and
+    negative temperature ranges.
+
+    :param temperature: temperature value in Celcius or Temp instance.
+    :type temperature: int, float, Temp
+    :param humidity: relative humidity in % (1-100)
+    :type humidity: int, float
+    :returns: Dew Point temperature
+    :rtype: Temp
+    """
 
     CONSTANTS = dict(
         positive=dict(b=17.368, c=238.88),

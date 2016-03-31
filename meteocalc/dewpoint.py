@@ -32,6 +32,10 @@ def dew_point(temperature, humidity):
         negative=dict(b=17.966, c=247.15),
     )
 
+    if humidity < 1 or humidity > 100:
+        msg = 'Incorrect value for humidity: "{}". Correct range 1-100.'
+        raise ValueError(msg.format(humidity))
+
     T = temperature.c if isinstance(temperature, Temp) else temperature
     RH = humidity
 

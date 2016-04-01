@@ -7,12 +7,12 @@ Calculations were implemented based on publicly available formulas.
 
 Implemented calculations:
 
-1. *Dew Point* is the temperature at which dew forms.
-2. *Heat Index* or "feels like temperature" is an index that combines air
+1. **Dew Point** is the temperature at which dew forms.
+2. **Heat Index** or "feels like temperature" is an index that combines air
    temperature and relative humidity in an attempt to determine the
    human-perceived equivalent temperature.
 
-Also *Temp* class is available to convert temperature between Celsius,
+Also **Temp** class is available to convert temperature between Celsius,
 Fahrenheit and Kelvin. It is also can be mixed with floats for basic math
 operations.
 

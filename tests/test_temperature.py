@@ -20,7 +20,7 @@ temperature_values = (
 
 class TempTest(unittest.TestCase):
 
-    def test_celcius_to_celcius(self):
+    def test_celsius_to_celsius(self):
         for t in temperature_values:
             temp = Temp(t['c'], unit='C')
             self.assertEqual(temp.c, t['c'])
@@ -35,17 +35,17 @@ class TempTest(unittest.TestCase):
             temp = Temp(t['k'], unit='K')
             self.assertEqual(temp.k, t['k'])
 
-    def test_celcius_to_fahrenheit(self):
+    def test_celsius_to_fahrenheit(self):
         for t in temperature_values:
             temp = Temp(t['c'], unit='C')
             self.assertEqual(round(temp.f, 2), t['f'])
 
-    def test_celcius_to_kelvin(self):
+    def test_celsius_to_kelvin(self):
         for t in temperature_values:
             temp = Temp(t['c'], unit='C')
             self.assertEqual(round(temp.k, 2), t['k'])
 
-    def test_fahrenheit_to_celcius(self):
+    def test_fahrenheit_to_celsius(self):
         for t in temperature_values:
             temp = Temp(t['f'], unit='F')
             self.assertEqual(round(temp.c, 2), t['c'])
@@ -55,7 +55,7 @@ class TempTest(unittest.TestCase):
             temp = Temp(t['f'], unit='F')
             self.assertEqual(round(temp.k, 2), t['k'])
 
-    def test_kelvin_to_celcius(self):
+    def test_kelvin_to_celsius(self):
         for t in temperature_values:
             temp = Temp(t['k'], unit='K')
             self.assertEqual(round(temp.c, 2), t['c'])

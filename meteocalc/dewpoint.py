@@ -19,7 +19,7 @@ def dew_point(temperature, humidity):
     Two set of constants are used provided by Arden Buck: for positive and
     negative temperature ranges.
 
-    :param temperature: temperature value in Celcius or Temp instance.
+    :param temperature: temperature value in Celsius or Temp instance.
     :type temperature: int, float, Temp
     :param humidity: relative humidity in % (1-100)
     :type humidity: int, float

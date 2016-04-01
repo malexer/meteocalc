@@ -3,7 +3,7 @@
 from .classutils import FloatCompatible
 
 
-C = 'c'  # Celcius
+C = 'c'  # Celsius
 F = 'f'  # Fahrenheit
 K = 'k'  # Kelvin
 
@@ -15,7 +15,7 @@ class Temp(metaclass=FloatCompatible):
     Can be converted to any unit by using properties: .c. .f, .k
 
     Currently supported units:
-        C - Celcius
+        C - Celsius
         F - Fahrenheit
         K - Kelvin
     """
@@ -53,7 +53,7 @@ class Temp(metaclass=FloatCompatible):
     def convert(cls, value, from_units, to_units):
         """Convert temperature value between any supported units.
 
-        Conversion is performed using Celcius as a base unit.
+        Conversion is performed using Celsius as a base unit.
         i.e. Fahrenheit -> Kelvin will be converted in two steps: F -> C -> K
 
         :param value: temperature value
@@ -86,7 +86,7 @@ class Temp(metaclass=FloatCompatible):
 
     @property
     def c(self):
-        """Temperature in Celcius."""
+        """Temperature in Celsius."""
         return self._convert_to(C)
 
     @property

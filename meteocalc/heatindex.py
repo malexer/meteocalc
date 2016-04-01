@@ -24,7 +24,7 @@ def heat_index(temperature, humidity):
 
     Default unit for resulting Temp value is Fahrenheit and it will be used
     in case of casting to int/float. Use Temp properties to convert result to
-    Celcius (Temp.c) or Kelvin (Temp.k).
+    Celsius (Temp.c) or Kelvin (Temp.k).
 
     :param temperature: temperature value in Fahrenheit or Temp instance.
     :type temperature: int, float, Temp

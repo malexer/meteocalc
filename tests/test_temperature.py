@@ -110,6 +110,9 @@ class TempTest(unittest.TestCase):
         self.assertEqual(round(t2.k, 2), 267.59)
         self.assertIsInstance(t2, Temp)
 
+    def test_unsupported_units(self):
+        self.assertRaises(ValueError, Temp, 20, 'd')
+
 
 if __name__ == '__main__':
     unittest.main()

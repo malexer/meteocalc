@@ -1,6 +1,9 @@
 meteocalc
 =========
 
+.. image:: https://travis-ci.org/malexer/meteocalc.svg?branch=master
+    :target: https://travis-ci.org/malexer/meteocalc
+
 Several functions for calculation of meteorological variables.
 
 Calculations were implemented based on publicly available formulas.

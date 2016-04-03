@@ -8,7 +8,11 @@ F = 'f'  # Fahrenheit
 K = 'k'  # Kelvin
 
 
-class Temp(metaclass=FloatCompatible):
+# support metaclass both in Python 2 and 3
+AbstractTemp = FloatCompatible('AbstractTemp', (object, ), {})
+
+
+class Temp(AbstractTemp):
     """Temperature value.
 
     Temp instance can be created in any unit by specifying `unit` attribute.

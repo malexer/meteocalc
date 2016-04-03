@@ -41,7 +41,7 @@ def dew_point(temperature, humidity):
 
     const = CONSTANTS['positive'] if T > 0 else CONSTANTS['negative']
 
-    pa = RH / 100 * math.exp(const['b'] * T / (const['c'] + T))
+    pa = RH / 100. * math.exp(const['b'] * T / (const['c'] + T))
 
     dp = const['c'] * math.log(pa) / (const['b'] - math.log(pa))
 

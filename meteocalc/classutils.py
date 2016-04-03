@@ -1,5 +1,10 @@
+import sys
+
 from functools import wraps
 import operator
+
+
+PYTHON2 = sys.version_info.major == 2
 
 
 class FloatCompatible(type):
@@ -9,13 +14,17 @@ class FloatCompatible(type):
     and return Temp instance in result of the same unit.
     """
 
-    math_methods = (
+    math_methods = [
         '__add__', '__sub__', '__mul__', '__truediv__',
         '__pos__', '__neg__',
-    )
-    math_rmethods = ('__radd__', '__rsub__', '__rmul__', '__rtruediv__')
+    ]
+    math_rmethods = ['__radd__', '__rsub__', '__rmul__', '__rtruediv__']
 
     def __new__(cls, name, bases, namespace):
+        if PYTHON2:
+            cls.math_methods.append('__div__')
+            cls.math_rmethods.append('__rdiv__')
+
         for method in cls.math_methods:
             namespace[method] = cls.math_method(method)
 

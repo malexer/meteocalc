@@ -23,7 +23,7 @@ operations.
 Requirements
 ------------
 
-* Python 3.x
+* Python 2.7 or 3.2+
 
 
 Install

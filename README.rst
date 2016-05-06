@@ -29,7 +29,9 @@ Requirements
 Install
 -------
 
-TBD
+.. code-block:: shell
+
+    $ pip install meteocalc
 
 
 Usage

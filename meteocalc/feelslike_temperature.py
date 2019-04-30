@@ -1,14 +1,17 @@
-"""Module for simplify calculation of Wind chill and heat_index
-"""
-
-import math
+"""Module to simplify calculation of Wind chill and heat_index."""
 
 from .temperature import Temp, F
 from .windchill import wind_chill
 from .heatindex import heat_index
 
-def FeelsLikeTemperature(temperature, humidity, wind_speed):
-    """Calculate Wind Chill (feels like temperature) based on NOAA.
+
+def feels_like(temperature, humidity, wind_speed):
+    """Calculate Feels Like temperature based on NOAA.
+
+    Logic:
+    * Wind Chill: temperature <= 50 F and wind > 3 mph
+    * Heat Index: temperature >= 80 F
+    * Temperature as is: all other cases
 
     Default unit for resulting Temp value is Fahrenheit and it will be used
     in case of casting to int/float. Use Temp properties to convert result to
@@ -20,21 +23,20 @@ def FeelsLikeTemperature(temperature, humidity, wind_speed):
     :type humidity: int, float
     :param wind_speed: wind speed in mph
     :type wind_speed: int, float
-    :returns: Wind chill value
+    :returns: Feels Like value
     :rtype: Temp
 
     """
 
     T = temperature.f if isinstance(temperature, Temp) else temperature
 
-    # Try windchil first
-    if( T <= 50 and wind_speed >= 3 ):
-        FEELS_LIKE = wind_chill( T, wind_speed )
+    if T <= 50 and wind_speed > 3:
+        # Wind Chill for low temp cases (and wind)
+        FEELS_LIKE = wind_chill(T, wind_speed)
+    elif T >= 80:
+        # Heat Index for High temp cases
+        FEELS_LIKE = heat_index(T, humidity)
     else:
         FEELS_LIKE = T
-
-    # Replace with the Heat Index, if necessary
-    if( FEELS_LIKE == T and T >= 80 ):
-        FEELS_LIKE = heat_index( T, humidity )
 
     return Temp(FEELS_LIKE, unit=F)

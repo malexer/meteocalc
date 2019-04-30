@@ -16,7 +16,6 @@ Formula details:
     https://www.wpc.ncep.noaa.gov/html/windchill.shtml
 """
 
-import math
 
 from .temperature import Temp, F
 
@@ -27,6 +26,9 @@ def wind_chill(temperature, wind_speed):
     Default unit for resulting Temp value is Fahrenheit and it will be used
     in case of casting to int/float. Use Temp properties to convert result to
     Celsius (Temp.c) or Kelvin (Temp.k).
+
+    Wind Chill Temperature is only defined for temperatures at or below
+    50°F and wind speeds above 3 mph.
 
     :param temperature: temperature value in Fahrenheit or Temp instance.
     :type temperature: int, float, Temp
@@ -39,6 +41,11 @@ def wind_chill(temperature, wind_speed):
     T = temperature.f if isinstance(temperature, Temp) else temperature
     V = wind_speed
 
-    WINDCHILL = 35.74 + (0.6215*T) - 35.75*(V**0.16) + 0.4275*T*(V**0.16)
+    if T > 50 or V <= 3:
+        raise ValueError(
+            "Wind Chill Temperature is only defined for temperatures at"
+            " or below 50°F and wind speeds above 3 mph.")
+
+    WINDCHILL = 35.74 + (0.6215 * T) - 35.75 * V**0.16 + 0.4275 * T * V**0.16
 
     return Temp(WINDCHILL, unit=F)

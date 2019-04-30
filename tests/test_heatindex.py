@@ -3,6 +3,8 @@ import unittest
 from tests.context import heat_index, Temp
 
 
+# format:
+# (F, Relative_Humidity): F
 heat_index_noaa_table = {
     (80, 40): 80,
     (88, 40): 88,
@@ -36,8 +38,8 @@ class HeatIndexTest(unittest.TestCase):
 
     def test_heat_index_by_noaa_table(self):
         for t_rh, hi in heat_index_noaa_table.items():
-            t, rh = t_rh
-            self.assertEqual(round(heat_index(t, rh)), hi)
+            temp, rel_humidity = t_rh
+            self.assertEqual(round(heat_index(temp, rel_humidity)), hi)
 
     def test_return_type(self):
         self.assertIsInstance(heat_index(80, 40), Temp)

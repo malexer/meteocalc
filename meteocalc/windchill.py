@@ -28,7 +28,7 @@ def wind_chill(temperature, wind_speed):
     Celsius (Temp.c) or Kelvin (Temp.k).
 
     Wind Chill Temperature is only defined for temperatures at or below
-    50°F and wind speeds above 3 mph.
+    50 F and wind speeds above 3 mph.
 
     :param temperature: temperature value in Fahrenheit or Temp instance.
     :type temperature: int, float, Temp

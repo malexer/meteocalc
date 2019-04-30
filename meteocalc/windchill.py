@@ -44,7 +44,7 @@ def wind_chill(temperature, wind_speed):
     if T > 50 or V <= 3:
         raise ValueError(
             "Wind Chill Temperature is only defined for temperatures at"
-            " or below 50°F and wind speeds above 3 mph.")
+            " or below 50 F and wind speeds above 3 mph.")
 
     WINDCHILL = 35.74 + (0.6215 * T) - 35.75 * V**0.16 + 0.4275 * T * V**0.16
 

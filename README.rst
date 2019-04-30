@@ -44,7 +44,7 @@ Usage
 
 ..note:
     Any input Temperature value can be provided in different units:
-    `Temp(20, 'c')  # c - celsius, f - fahrenheit, k - kelvin`
+    ``Temp(20, 'c')  # c - celsius, f - fahrenheit, k - kelvin``
 
 .. code-block:: python
 
